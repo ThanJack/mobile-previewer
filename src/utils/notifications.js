@@ -1,5 +1,5 @@
-import { Platform, PushNotificationIOS } from 'react-native'
-import PushNotification from 'react-native-push-notification'
+import { Platform, PushNotificationIOS } from 'react-native';
+import PushNotification from 'react-native-push-notification';
 
 export const register = ({ onRegister, onNotification }) => {
   PushNotification.configure({
@@ -10,29 +10,30 @@ export const register = ({ onRegister, onNotification }) => {
     requestPermissions: false,
   });
 
-  console.log('REQUESTING....')
+  console.log('REQUESTING....');
   setTimeout(() => {
-    PushNotification.requestPermissions()
-  })
-  console.log('REQUESTED....')
-}
+    PushNotification.requestPermissions();
+  });
+  console.log('REQUESTED....');
+};
 
 const handleNotification = callback => notification => {
-  let { userInteraction } = notification
-  let { appId, route } = notification.data
+  let { userInteraction } = notification;
+  let { appId, route } = notification.data;
 
   if (Platform.OS === 'ios') {
     notification.finish(PushNotificationIOS.FetchResult.NoData);
   }
 
-  if (!userInteraction || !appId || !route || !route.target) { return }
+  if (!userInteraction || !appId || !route || !route.target) {
+    return;
+  }
 
-  callback(appId, route)
-}
+  callback(appId, route);
+};
 
 const handleRegister = callback => device => {
-  console.log('------------------->', JSON.stringify(device))
+  console.log('------------------->', JSON.stringify(device));
 
-  callback(device.token)
-}
-
+  callback(device.token);
+};

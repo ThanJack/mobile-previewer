@@ -1,0 +1,28 @@
+diff --git a/node_modules/@babel/core/lib/transformation/util/clone-deep.js b/node_modules/@babel/core/lib/transformation/util/clone-deep.js
+index 35fbd09..318c51a 100644
+--- a/node_modules/@babel/core/lib/transformation/util/clone-deep.js
++++ b/node_modules/@babel/core/lib/transformation/util/clone-deep.js
+@@ -17,9 +17,22 @@ function _v() {
+ 
+ var _cloneDeepBrowser = require("./clone-deep-browser");
+ 
++// function _default(value) {
++//   if (_v().deserialize && _v().serialize) {
++//     return _v().deserialize(_v().serialize(value));
++//   }
++
++//   return (0, _cloneDeepBrowser.default)(value);
++// }
++
+ function _default(value) {
+   if (_v().deserialize && _v().serialize) {
+-    return _v().deserialize(_v().serialize(value));
++    try {
++      return _v().deserialize(_v().serialize(value));
++    } catch(err) {
++      // console.warn(err);
++      return value;
++    }
+   }
+ 
+   return (0, _cloneDeepBrowser.default)(value);

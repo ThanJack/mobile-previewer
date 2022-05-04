@@ -1,6 +1,6 @@
-import moment from 'moment'
+import moment from 'moment';
 
 export const relativeDate = integerDate => {
-  let dateObj = new Date(integerDate)
-  return moment(dateObj).fromNow()
-}
+  let dateObj = new Date(integerDate);
+  return moment(dateObj).fromNow();
+};

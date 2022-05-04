@@ -1,23 +1,22 @@
-import React, { Component } from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
-import { reduxForm, Field } from 'redux-form'
-import WrappedInput from '../Forms/WrappedInput'
-import Button from './Button'
+import React, { Component } from 'react';
+import { View, Image, Text, StyleSheet } from 'react-native';
+import { reduxForm, Field } from 'redux-form';
+import WrappedInput from '../Forms/WrappedInput';
+import Button from './Button';
 
-import Logo from './logo.png'
+import Logo from './logo.png';
 
-const FORM_NAME = 'loginForm'
+const FORM_NAME = 'loginForm';
 
 class LoginForm extends Component {
   render() {
-    let { handleSubmit, error } = this.props
+    let { handleSubmit, error } = this.props;
 
     return (
       <View
         onSubmit={handleSubmit}
         className="auth-form"
-        style={styles.wrapper}
-      >
+        style={styles.wrapper}>
         <View style={styles.logoWrapper}>
           <Image source={Logo} />
         </View>
@@ -44,20 +43,17 @@ class LoginForm extends Component {
             inputStyle={styles.input}
           />
         </View>
-        <Button
-          title="Sign In"
-          onPress={handleSubmit}
-        >
+        <Button title="Sign In" onPress={handleSubmit}>
           Sign In
         </Button>
       </View>
-    )
+    );
   }
 }
 
 export default reduxForm({
-  form: FORM_NAME
-})(LoginForm)
+  form: FORM_NAME,
+})(LoginForm);
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -75,7 +71,7 @@ const styles = StyleSheet.create({
     padding: 12,
   },
   inputs: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   label: {
     fontSize: 12,
@@ -88,5 +84,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-})
-
+});

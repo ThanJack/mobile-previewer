@@ -1,13 +1,13 @@
 export const mergeReducers = (initialState, ...reducers) => {
-  return (state=initialState, action) => {
+  return (state = initialState, action) => {
     for (let i = 0; i < reducers.length; i += 1) {
-      let result = reducers[i](state, action)
+      let result = reducers[i](state, action);
 
       if (result !== undefined && result !== state) {
-        return result
+        return result;
       }
     }
 
-    return state
-  }
-}
+    return state;
+  };
+};

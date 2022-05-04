@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import {
   View,
@@ -10,34 +10,34 @@ import {
   Easing,
   AsyncStorage,
   Platform,
-} from 'react-native'
+} from 'react-native';
 
-import { connect } from 'react-redux'
-import { StackActions, NavigationActions } from 'react-navigation'
-import RNShake from 'react-native-shake'
-import ActionSheet from 'react-native-action-sheet'
+import { connect } from 'react-redux';
+import { StackActions, NavigationActions } from 'react-navigation';
+import RNShake from 'react-native-shake';
+import ActionSheet from 'react-native-action-sheet';
 
-import Runner from '@protonapp/proton-runner'
+import Runner from '@protonapp/proton-runner';
 
-import { getApp, requestApp } from '../../ducks/apps'
-import AppBar from '../AppList/AppBar'
+import { getApp, requestApp } from '../../ducks/apps';
+import AppBar from '../AppList/AppBar';
 
-export const baseURL = 'https://database-red.adalo.com'
+export const baseURL = 'https://database-red.adalo.com';
 export const assetsBaseURL =
-  'https://s3-us-west-1.amazonaws.com/apto-resources-dev'
+  'https://s3-us-west-1.amazonaws.com/apto-resources-dev';
 export const fileUploadsBaseURL =
-  'https://proton-uploads-production.s3.amazonaws.com'
-export const imageUploadsBaseURL = 'https://adalo-uploads.imgix.net'
-export const notificationsURL = 'https://notifications.adalo.com'
+  'https://proton-uploads-production.s3.amazonaws.com';
+export const imageUploadsBaseURL = 'https://adalo-uploads.imgix.net';
+export const notificationsURL = 'https://notifications.adalo.com';
 
-import libraries from '../../../libraries'
+import libraries from '../../../libraries';
 
 class Viewer extends Component {
   handleClose = () => {
-    let { navigation } = this.props
+    let { navigation } = this.props;
 
-    navigation.dispatch(NavigationActions.back())
-  }
+    navigation.dispatch(NavigationActions.back());
+  };
 
   menuButtonCB = () => {
     ActionSheet.showActionSheetWithOptions(
@@ -45,26 +45,26 @@ class Viewer extends Component {
         options: ['Cancel', 'Reload', 'Exit'],
         cancelButtonIndex: 0,
       },
-      async (index) => {
-        let { navigation, requestApp } = this.props
+      async index => {
+        let { navigation, requestApp } = this.props;
 
         if (index === 1) {
           // Reload
-          requestApp(navigation.state.params.appId)
+          requestApp(navigation.state.params.appId);
         } else if (index === 2) {
           // Exit
-          this.handleClose()
+          this.handleClose();
         }
-      }
-    )
-  }
+      },
+    );
+  };
 
   handleChangeAppState = () => {
-    let currentState = AppState.currentState
-    let { navigation } = this.props
+    let currentState = AppState.currentState;
+    let { navigation } = this.props;
 
     if (!navigation || Platform.OS === 'android') {
-      return
+      return;
     }
 
     if (currentState === 'background') {
@@ -72,31 +72,31 @@ class Viewer extends Component {
         StackActions.reset({
           index: 0,
           actions: [NavigationActions.navigate({ routeName: 'Home' })],
-        })
-      )
+        }),
+      );
     }
-  }
+  };
 
-  getLibraries = () => libraries
+  getLibraries = () => libraries;
 
-  getAssetURL = (filename) => {
-    return `${assetsBaseURL}/${filename}`
-  }
+  getAssetURL = filename => {
+    return `${assetsBaseURL}/${filename}`;
+  };
 
   componentDidMount() {
-    let { navigation, requestApp } = this.props
-    requestApp(navigation.state.params.appId)
+    let { navigation, requestApp } = this.props;
+    requestApp(navigation.state.params.appId);
 
-    AppState.addEventListener('change', this.handleChangeAppState)
+    AppState.addEventListener('change', this.handleChangeAppState);
   }
 
   componentWillUnmount() {
-    AppState.removeEventListener('change', this.handleChangeAppState)
+    AppState.removeEventListener('change', this.handleChangeAppState);
   }
 
   render() {
-    let { app, navigation } = this.props
-    let { deviceId, initialRoute } = navigation.state.params
+    let { app, navigation } = this.props;
+    let { deviceId, initialRoute } = navigation.state.params;
     return (
       <View style={styles.view}>
         <AppBar navigation={navigation} menuButtonCB={this.menuButtonCB} />
@@ -115,7 +115,7 @@ class Viewer extends Component {
           appVersion="latest"
         />
       </View>
-    )
+    );
   }
 }
 
@@ -133,10 +133,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});
 
 const mapStateToProps = (state, ownProps) => ({
   app: getApp(state, ownProps.navigation.state.params.appId),
-})
+});
 
-export default connect(mapStateToProps, { requestApp })(Viewer)
+export default connect(mapStateToProps, { requestApp })(Viewer);

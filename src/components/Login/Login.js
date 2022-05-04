@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 import {
   View,
@@ -9,44 +9,43 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-} from 'react-native'
+} from 'react-native';
 
-import { SubmissionError } from 'redux-form'
-import { NavigationActions } from 'react-navigation'
+import { SubmissionError } from 'redux-form';
+import { NavigationActions } from 'react-navigation';
 
-import { authenticate } from '../../utils/io'
-import Form from './LoginForm'
+import { authenticate } from '../../utils/io';
+import Form from './LoginForm';
 
 export default class Login extends Component {
   handleLogin = data => {
     authenticate(data, async ({ success, sessionToken }) => {
-      let { navigation } = this.props
+      let { navigation } = this.props;
 
-      console.log(success, sessionToken)
+      console.log(success, sessionToken);
 
       if (!success) {
         // Show errors
         Alert.alert(
           'Invalid email or password',
           'Please check the email and password you entered, and try again.',
-          [{ text: 'OK', onPress: () => {} }]
-        )
+          [{ text: 'OK', onPress: () => {} }],
+        );
 
-        return
+        return;
       }
 
       try {
-        await AsyncStorage.setItem('protonSession', sessionToken)
-        navigation.dispatch(NavigationActions.back())
+        await AsyncStorage.setItem('protonSession', sessionToken);
+        navigation.dispatch(NavigationActions.back());
       } catch (err) {
-        Alert.alert(
-          'An error occurred',
-          'Please try again',
-          { text: 'OK', onPress: () => {} }
-        )
+        Alert.alert('An error occurred', 'Please try again', {
+          text: 'OK',
+          onPress: () => {},
+        });
       }
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -54,35 +53,29 @@ export default class Login extends Component {
         <WrappedKeyboardAvoidingView
           enabled
           style={styles.innerWrapper}
-          behavior="padding"
-        >
+          behavior="padding">
           <ScrollView
             style={styles.scrollView}
-            keyboardShouldPersistTaps="handled"
-          >
+            keyboardShouldPersistTaps="handled">
             <View style={styles.formWrapper}>
               <Form onSubmit={this.handleLogin} />
             </View>
           </ScrollView>
         </WrappedKeyboardAvoidingView>
       </SafeAreaView>
-    )
+    );
   }
 }
 
 class WrappedKeyboardAvoidingView extends Component {
   render() {
-    let { children, style, ...props } = this.props
+    let { children, style, ...props } = this.props;
 
     if (Platform.OS === 'ios') {
-      return <KeyboardAvoidingView {...this.props} />
+      return <KeyboardAvoidingView {...this.props} />;
     }
 
-    return (
-      <View style={style}>
-        {children}
-      </View>
-    )
+    return <View style={style}>{children}</View>;
   }
 }
 
@@ -96,6 +89,5 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-  formWrapper: {
-  },
-})
+  formWrapper: {},
+});

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   View,
   Text,
@@ -6,20 +6,20 @@ import {
   StyleSheet,
   SafeAreaView,
   Platform,
-} from 'react-native'
+} from 'react-native';
 
-import MenuButton from './MenuButton'
-import LogoImage from './images/logo-image.png'
+import MenuButton from './MenuButton';
+import LogoImage from './images/logo-image.png';
 
-const STATUS_BAR_HEIGHT = 24
+const STATUS_BAR_HEIGHT = 24;
 
 export default class AppBar extends Component {
   render() {
-    let { navigation, menuButtonCB } = this.props
-    let innerWrapperStyles = {}
+    let { navigation, menuButtonCB } = this.props;
+    let innerWrapperStyles = {};
 
     if (Platform.OS === 'android') {
-      innerWrapperStyles.marginTop = 24
+      innerWrapperStyles.marginTop = 24;
     }
 
     return (
@@ -32,7 +32,7 @@ export default class AppBar extends Component {
             <View style={styles.title}>
               <Image source={LogoImage} />
             </View>
-            <View style={[styles.button, styles.RightButton]}></View>
+            <View style={[styles.button, styles.RightButton]} />
           </View>
         </SafeAreaView>
         <View style={styles.headerStripe}>
@@ -41,7 +41,7 @@ export default class AppBar extends Component {
           <View style={{ flex: 1, backgroundColor: '#ef4c30' }} />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'stretch',
   },
-})
+});

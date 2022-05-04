@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
-import { View, Text, TextInput } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, TextInput } from 'react-native';
 
 export default class WrappedInput extends Component {
   textInputRef = el => {
-    this.input = el
-  }
+    this.input = el;
+  };
 
   componentDidMount() {
-    let { autoFocus } = this.props
+    let { autoFocus } = this.props;
 
     setTimeout(() => {
       if (autoFocus && this.input) {
-        this.input.focus()
+        this.input.focus();
       }
-    }, 400)
+    }, 400);
   }
 
   render() {
@@ -25,15 +25,13 @@ export default class WrappedInput extends Component {
       placeholder,
       autoFocus,
       ...props
-    } = this.props
+    } = this.props;
 
-    let { value, onChange } = this.props.input
+    let { value, onChange } = this.props.input;
 
     return (
       <View style={style}>
-        {label
-          ? <Text style={labelStyle}>{label}</Text>
-          : null}
+        {label ? <Text style={labelStyle}>{label}</Text> : null}
         <TextInput
           {...props}
           ref={this.textInputRef}
@@ -44,6 +42,6 @@ export default class WrappedInput extends Component {
           underlineColorAndroid="transparent"
         />
       </View>
-    )
+    );
   }
 }

@@ -1,64 +1,64 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { View, Image, StyleSheet, Platform, AsyncStorage } from 'react-native'
+import { View, Image, StyleSheet, Platform, AsyncStorage } from 'react-native';
 
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 import {
   getAuthVisible,
   getCurrentUser,
   setCurrentUser,
-} from '../../ducks/users'
-import ListWrapper from './ListWrapper'
-import MenuButton from './MenuButton'
-import AppBar from './AppBar'
-import ActionSheet from 'react-native-action-sheet'
+} from '../../ducks/users';
+import ListWrapper from './ListWrapper';
+import MenuButton from './MenuButton';
+import AppBar from './AppBar';
+import ActionSheet from 'react-native-action-sheet';
 
 class AppList extends Component {
   render() {
-    let { navigation, authVisible, currentUser, deviceId } = this.props
+    let { navigation, authVisible, currentUser, deviceId } = this.props;
 
     if (authVisible && !global.authIsMounted) {
-      navigation.navigate('Login')
+      navigation.navigate('Login');
     }
 
-    return <ListWrapper userLoading={!currentUser} navigation={navigation} />
+    return <ListWrapper userLoading={!currentUser} navigation={navigation} />;
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   authVisible: getAuthVisible(state),
   currentUser: getCurrentUser(state),
-})
+});
 
-const ConnectedAppList = connect(mapStateToProps)(AppList)
+const ConnectedAppList = connect(mapStateToProps)(AppList);
 
 export default class AppListWrapper extends Component {
   menuButtonCB = () => {
-    let { navigation } = this.props
+    let { navigation } = this.props;
     ActionSheet.showActionSheetWithOptions(
       {
         options: ['Cancel', 'Logout'],
         destructiveButtonIndex: 1,
         cancelButtonIndex: 0,
       },
-      async (index) => {
+      async index => {
         if (index === 1) {
           // Logout
-          await AsyncStorage.removeItem('protonSession')
-          setCurrentUser(null)
-          navigation.navigate('Login')
+          await AsyncStorage.removeItem('protonSession');
+          setCurrentUser(null);
+          navigation.navigate('Login');
         }
-      }
-    )
-  }
+      },
+    );
+  };
   render() {
     return (
       <View style={styles.wrapper}>
         <AppBar {...this.props} menuButtonCB={this.menuButtonCB} />
         <ConnectedAppList {...this.props} />
       </View>
-    )
+    );
   }
 }
 
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     width: 90,
     height: 24,
   },
-})
+});

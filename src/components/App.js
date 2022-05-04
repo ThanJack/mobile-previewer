@@ -1,8 +1,8 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import AppList from './AppList'
-import Viewer from './Viewer'
-import Login from './Login'
+import AppList from './AppList';
+import Viewer from './Viewer';
+import Login from './Login';
 
 const AppNavigator = createStackNavigator(
   {
@@ -10,20 +10,20 @@ const AppNavigator = createStackNavigator(
     Login: {
       screen: Login,
       navigationOptions: {
-        gesturesEnabled: false
-      }
+        gesturesEnabled: false,
+      },
     },
     Viewer: {
       screen: Viewer,
       navigationOptions: {
-        gesturesEnabled: false
-      }
+        gesturesEnabled: false,
+      },
     },
   },
   {
     mode: 'modal',
-    headerMode: 'none'
-  }
-)
+    headerMode: 'none',
+  },
+);
 
-export default createAppContainer(AppNavigator)
+export default createAppContainer(AppNavigator);

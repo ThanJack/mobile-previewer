@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default class Loader extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class Loader extends Component {
       <View style={styles.wrapper}>
         <Text style={styles.text}>Loading...</Text>
       </View>
-    )
+    );
   }
 }
 
@@ -15,10 +15,10 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   text: {
     color: '#444',
-    fontSize: 17
-  }
-})
+    fontSize: 17,
+  },
+});
